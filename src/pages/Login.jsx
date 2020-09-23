@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import CreateAccount from "../components/CreateAccount";
 import SignInAccount from "../components/SignInAccount";
@@ -71,7 +71,7 @@ const TransitionWrapper = styled.div`
 
   .fade-enter.fade-enter-active {
     opacity: 1;
-    transition: opacity 500ms ease-in;
+    transition: opacity 500ms ease-in-out;
   }
 
   .fade-exit {
@@ -80,11 +80,12 @@ const TransitionWrapper = styled.div`
 
   .fade-exit.fade-exit-active {
     opacity: 0;
-    transition: opacity 500ms ease-in;
+    transition: opacity 500ms ease-in-out;
   }
 `;
 
 const Login = () => {
+  const [signInView, setSignInView] = useState(true);
   const { state } = useContext(CTX);
 
   return (
@@ -112,11 +113,16 @@ const Login = () => {
           <TransitionWrapper style={{ height: "100%" }}>
             <TransitionGroup style={{ height: "100%" }}>
               <CSSTransition
-                key={state.login}
-                timeout={{ enter: 500, exit: 500 }}
+                key={signInView}
+                timeout={300}
                 classNames="fade"
+                unmountOnExit
               >
-                {state.login ? <SignInAccount /> : <CreateAccount />}
+                {signInView ? (
+                  <SignInAccount setSignInView={setSignInView} />
+                ) : (
+                  <CreateAccount setSignInView={setSignInView} />
+                )}
               </CSSTransition>
             </TransitionGroup>
           </TransitionWrapper>
