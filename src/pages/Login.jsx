@@ -7,26 +7,27 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const MainWrapper = styled.div`
   display: flex;
-  height: 100%;
+  height: 100vh;
 `;
 
 const LeftWrapper = styled.div`
   display: flex;
-  width: 40%;
+  flex: 1;
   max-width: 440px;
   min-width: 320px;
   background: #1d282d;
-  padding: 120px 0 200px 80px;
+  align-items: center;
 
   .aboutProject {
-    width: 100%;
-    height: 100%;
+    width: 64%;
+    height: 64%;
     padding: 40px;
     position: relative;
     background: #e5e6e4;
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
     overflow: hidden;
+    margin-inline-start: auto;
   }
 
   .abstract {
@@ -40,13 +41,14 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
   display: flex;
+  flex: 2;
   width: 100%;
   background: #faf9f9;
-  padding: 120px 80px 200px 0;
+  align-items: center;
 
   .accountSection {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 64%;
     padding: 40px;
     position: relative;
     background: #283d3b;
@@ -110,22 +112,11 @@ const Login = () => {
               alt="account-vector"
             />
           </div>
-          <TransitionWrapper style={{ height: "100%" }}>
-            <TransitionGroup style={{ height: "100%" }}>
-              <CSSTransition
-                key={signInView}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {signInView ? (
-                  <SignInAccount setSignInView={setSignInView} />
-                ) : (
-                  <CreateAccount setSignInView={setSignInView} />
-                )}
-              </CSSTransition>
-            </TransitionGroup>
-          </TransitionWrapper>
+          {signInView ? (
+            <SignInAccount setSignInView={setSignInView} />
+          ) : (
+            <CreateAccount setSignInView={setSignInView} />
+          )}
         </div>
       </RightWrapper>
     </MainWrapper>

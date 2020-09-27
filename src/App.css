@@ -5,6 +5,47 @@
   flex-direction: column;
 }
 
+.main__header {
+  z-index: 999;
+}
+
 .main__body {
   flex: 1;
+  height: calc(100vh - 56px);
+}
+
+.h-x4 {
+  height: 2px;
+}
+
+.h-x2 {
+  height: 4px;
+}
+
+.h-2x {
+  height: 16px;
+}
+
+.h-3x {
+  height: 24px;
+}
+
+.h-4x {
+  height: 32px;
+}
+
+.h-5x {
+  height: 40px;
+}
+
+.w-x {
+  width: 8px;
+}
+
+.w-2x {
+  width: 16px;
+}
+
+.w-3x {
+  width: 24px;
 }

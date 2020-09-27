@@ -37,7 +37,7 @@ export const AlignStart = styled.div`
 export const Header = styled.h1`
   font-size: 32px;
   color: #faf9f9;
-  margin-bottom: 80px;
+  margin-bottom: 24px;
 `;
 
 export const InputLabel = styled.label`
