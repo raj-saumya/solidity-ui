@@ -27,7 +27,7 @@ const CreateAccount = ({ setSignInView }) => {
         type: "LOGIN",
         payload: {
           login: true,
-          token: resp.data.auth_token
+          token: resp2.data.auth_token
         }
       });
       history.push("/");
