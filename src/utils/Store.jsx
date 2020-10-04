@@ -1,7 +1,9 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  login: false,
+  account: {
+    login: false
+  },
   questions: []
 };
 
@@ -10,9 +12,11 @@ export const CTX = createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { ...state, login: action.payload };
+      return { ...state, account: action.payload };
     case "ADD_QUESTION":
       return { ...state, questions: [...state.questions, action.payload] };
+    case "SET_ROOM_ID":
+      return { ...state, roomId: action.payload };
     default:
       return state;
   }

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { Route, Switch } from "react-router-dom";
 import Room from "../components/Room";
+import { CTX } from "../utils/Store";
+import { Redirect } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -79,14 +81,16 @@ const EnterRoomId = ({
         <Button
           onClick={() => {
             handleConnectStatus(true);
+            console.log(roomId);
             setTimeout(() => {
-              history.push("/joinQuiz/room");
+              history.push(`/joinQuiz/${roomId}`);
             }, 1000);
           }}
         >
           Connect
         </Button>
       )}
+      <div className="h-4x"></div>
     </InputSection>
   );
 };
@@ -94,6 +98,11 @@ const EnterRoomId = ({
 const JoinRoom = () => {
   const [roomId, setRoomId] = useState("");
   const [connect, setConnectStatus] = useState(false);
+  const { state } = useContext(CTX);
+
+  if (!state.account.login) {
+    return <Redirect push to="/login" />;
+  }
 
   return (
     <Wrapper>
@@ -113,7 +122,7 @@ const JoinRoom = () => {
             );
           }}
         />
-        <Route path="/joinQuiz/room" component={Room} />
+        <Route path="/joinQuiz/:id" component={Room} />
       </Switch>
     </Wrapper>
   );

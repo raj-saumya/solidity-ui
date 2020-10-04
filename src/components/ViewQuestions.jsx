@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { CTX } from "../utils/Store";
 import styled from "styled-components";
 import ViewQuestionCard from "./ViewQuestionCard";
-import { Button } from "../Shared/custom-components";
 import { Link } from "react-router-dom";
+import api from "../Shared/api";
+import { useHistory } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const Header = styled.label`
   font-weight: bold;
 `;
 
-const SaveBtn = styled(Link)`
+const SaveBtn = styled.button`
   width: fit-content;
   padding: 8px 16px;
   background: #2e7d32;
@@ -39,13 +40,32 @@ const SaveBtn = styled(Link)`
 `;
 
 const ViewQuestions = () => {
-  const { state } = useContext(CTX);
+  const { state, dispatch } = useContext(CTX);
+  const history = useHistory();
+
+  const handleSubmit = async () => {
+    try {
+      const resp = await api.accountService().submitQuiz(
+        { quizQuestions: [] },
+        {
+          headers: {
+            Authorization: "Token " + state.account.token
+          }
+        }
+      );
+      console.log("resp", resp.data);
+      dispatch({ type: "SET_ROOM_ID", payload: resp.data.room_id });
+      history.push(`/joinQuiz/${resp.data.room_id}`);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <React.Fragment>
       <HeaderWrapper>
         <Header>All Questions</Header>
-        <SaveBtn to="/">Save</SaveBtn>
+        <SaveBtn onClick={handleSubmit}>Save</SaveBtn>
       </HeaderWrapper>
       <Wrapper>
         {state.questions.map((d, i) => (

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddQuestion from "../components/AddQuestion";
 import ViewQuestions from "../components/ViewQuestions";
+import { Redirect } from "react-router-dom";
+import { CTX } from "../utils/Store";
 
 const useStyles = makeStyles(theme => ({
   hDivider: {
@@ -38,6 +40,11 @@ const QuestionSection = styled.div`
 
 const Questionaire = () => {
   const classes = useStyles();
+  const { state } = useContext(CTX);
+
+  if (!state.account.login) {
+    return <Redirect push to="/login" />;
+  }
 
   return (
     <Wrapper>

@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CreateAccount from "../components/CreateAccount";
 import SignInAccount from "../components/SignInAccount";
-import { CTX } from "../utils/Store";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -66,29 +64,8 @@ const RightWrapper = styled.div`
   }
 `;
 
-const TransitionWrapper = styled.div`
-  .fade-enter {
-    opacity: 0;
-  }
-
-  .fade-enter.fade-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in-out;
-  }
-
-  .fade-exit {
-    opacity: 1;
-  }
-
-  .fade-exit.fade-exit-active {
-    opacity: 0;
-    transition: opacity 500ms ease-in-out;
-  }
-`;
-
 const Login = () => {
   const [signInView, setSignInView] = useState(true);
-  const { state } = useContext(CTX);
 
   return (
     <MainWrapper>

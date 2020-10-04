@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { CTX } from "../utils/Store";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -50,6 +52,16 @@ const Choices = styled.div`
 const Room = () => {
   const classes = useStyles();
   const [answer, setAnswer] = useState(0);
+  const { state } = useContext(CTX);
+  let { id } = useParams();
+
+  const socket = new WebSocket(
+    `ws://localhost:8000/ws/quiz/${id}/${state.account.token}`
+  );
+
+  socket.onmessage = event => {
+    console.log("message ---", event);
+  };
 
   return (
     <Wrapper>

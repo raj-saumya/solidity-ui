@@ -7,7 +7,7 @@ const Home = ({ history }) => {
 
   return (
     <React.Fragment>
-      {state.login ? <div>Home</div> : <Redirect push to="/login" />}
+      {state.account.login ? <div>Home</div> : <Redirect push to="/login" />}
     </React.Fragment>
   );
 };

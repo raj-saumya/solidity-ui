@@ -27,6 +27,7 @@ export const Button = styled.button`
   border: none;
   padding: 12px 16px;
   place-self: center;
+  cursor: pointer;
 `;
 
 export const AlignStart = styled.div`
