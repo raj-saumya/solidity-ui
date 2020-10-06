@@ -100,9 +100,9 @@ const JoinRoom = () => {
   const [connect, setConnectStatus] = useState(false);
   const { state } = useContext(CTX);
 
-  if (!state.account.login) {
-    return <Redirect push to="/login" />;
-  }
+  // if (!state.account.login) {
+  //   return <Redirect push to="/login" />;
+  // }
 
   return (
     <Wrapper>
